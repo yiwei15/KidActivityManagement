@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<KidActivityManagement.Models.Child>;
+
+<h1>Children List</h1>
+
+@if (Model.Count == 0)
+{
+    <p>No child yet.</p>
+}
+else
+{
+    foreach (var child in Model)
+    {
+        <Div>
+            <p style="font-size:40px; text-indent: 50px; font-weight: bold">@child.Name </p>
+            <p style="text-indent: 50px">Gender: @child.Gender </p>
+            <p style="text-indent: 50px">Date of Birth: @child.DOB.ToShortDateString() </p>
+
+        </Div>
+    }
+}
+
+<p><a asp-controller="Child" asp-action="Add">Add a Child</a></p>
+
+@if (Model.Count > 0)
+{
+    <p><a asp-controller="Child" asp-action="Delete">Delete a Child</a></p>
+}
+

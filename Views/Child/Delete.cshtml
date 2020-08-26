@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<KidActivityManagement.Models.Child>
+
+<h1>Delete Child</h1>
+
+@if (Model.Count == 0)
+{
+    <p>No child yet!</p>
+}
+
+else
+{
+<form asp-controller="Child" asp-action="Delete" method="post">
+    @foreach (var child in Model)
+    {
+        <div class="form-group">
+            <label>
+                <span>@child.Name</span>
+                <input type="checkbox" name="childIds" value="@child.Id" class=" form-control" />
+            </label>
+        </div>
+    }
+
+    <input type="submit" value="Delete Selected Children" class="btn btn-danger" />
+
+</form>
+
+}

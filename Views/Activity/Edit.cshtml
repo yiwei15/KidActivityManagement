@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model KidActivityManagement.ViewModels.EditChildActivityViewModel
+@*
+
+    <div class="container body-content">
+        <h1>Activity: @Model.ActivityName for @Model.ChildName</h1>
+
+            <form class="form-group" asp-controller="Activity" asp-action="ProcessEdit" method="post">
+                <table class="job-listing">
+                    <tr>
+                        <td>
+                            <input type ="text" asp-for="ChildName"/>
+                        </td>>
+                    </tr>
+                    <tr><td>Start Time: @Model.ActivityStartTime</td></tr>
+                    <tr><td>End Time: @Model.ActivityEndTime</td></tr>
+                    <tr>
+                        <td>
+                            Virtual Activity:
+                            @if (Model.ActivityIsOnline == true)
+                            {<span>yes</span> }
+                            else
+                            {<span>No</span>}
+                        </td>
+                    </tr>
+                    <tr><td>Location or Login Information: @Model.ActivityLocation</td></tr>
+                    <tr><td>Status: @Model.ActivityStatus</td></tr>
+                    <tr><td>Note: @Model.ActivityNote</td></tr>
+                </table>
+                <div style="text-align:center">
+                    <input type="submit" value="Submit" style="text-align:center" />
+                </div>
+
+            </form>
+        }
+
+*@
