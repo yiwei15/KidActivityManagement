@@ -21,6 +21,12 @@ namespace KidActivityManagement.ViewModels
         [Display(Name = "End Time")]
         public DateTime EndTime { get; set; }
 
+        public TimeSpan duration;
+
+        public readonly int numOfDays;
+        public readonly int numOfHours;
+        public readonly int numOfMins;
+
         [Display(Name = "Virtual activity")]
         public Boolean IsOnline { get; set; }
 
@@ -42,20 +48,10 @@ namespace KidActivityManagement.ViewModels
             IsOnline = theActivity.IsOnline;
             Location = theActivity.Location;
             ChildActivities = childActivities;
-
-
-            /*
-            List<int> ChildIds = new List<int>();
-
-            foreach (var childactivity in childActivities)
-            {
-                ChildIds.Add(childactivity.ChildId);
-            }
-
-            Status= childActivities.Status;
-            Note = childActivities.;
-            */
-
+            duration = theActivity.EndTime - theActivity.StartTime;
+            numOfDays = duration.Days;
+            numOfHours = duration.Hours;
+            numOfMins = duration.Minutes;
         }
 
     }

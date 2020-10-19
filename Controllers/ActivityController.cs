@@ -3,21 +3,27 @@ using System.Linq;
 using KidActivityManagement.Data;
 using KidActivityManagement.Models;
 using KidActivityManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace KidActivityManagement.Controllers
 {
+    [Authorize]
     public class ActivityController : Controller
     {
         private ChildActivityDbContext context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ActivityController(ChildActivityDbContext dbContext)
+        public ActivityController(ChildActivityDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             context = dbContext;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
+            var userId = _userManager.GetUserId(User);
             List<Activity> Activities = context.Activities.ToList();
             return View(Activities);
         }
@@ -37,6 +43,7 @@ namespace KidActivityManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
                 Activity newActivity = new Activity()
                 {
                     Name = addActivityViewModel.Name,
@@ -55,7 +62,8 @@ namespace KidActivityManagement.Controllers
                     {
                         Activity = newActivity,
                         ChildId = childId,
-                        ActivityId = newActivity.Id
+                        ActivityId = newActivity.Id,
+                        Status = "toDo"
                     };
                     context.ChildActivites.Add(newChildActivity);
                 }

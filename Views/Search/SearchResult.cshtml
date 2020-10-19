@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model KidActivityManagement.ViewModels.SearchViewModel
+
+<h1>Search Result: </h1>
+
+<br />
+<form method="post" asp-controller="Search" asp-action="SearchResult">
+    @if (Model.ChildIds != null)
+    {
+        @for (int i = 0; i < Model.ChildIds.Length; i++)
+        {
+            @Html.HiddenFor(model => Model.ChildIds[i])
+        }
+
+    }
+    @if (Model.StatusList != null)
+    {
+        @for (int i = 0; i < Model.StatusList.Length; i++)
+        {
+            @Html.HiddenFor(model => Model.StatusList[i])
+        }
+    }
+    @Html.HiddenFor(model => Model.StartTimeChoice)
+    @Html.HiddenFor(model => Model.StartTime)
+    @Html.HiddenFor(model => Model.EndTimeChoice)
+    @Html.HiddenFor(model => Model.EndTime)
+    @Html.HiddenFor(model => Model.Online)
+    <div>
+        <label for="SortItem">Sort by: </label>
+        <select name="SortItem">
+            <option value="ChildId">Child</option>
+            <option value="StartTime">Time</option>
+            <option value="IsOnline">Virtual?</option>
+            <option value="Status">Status</option>
+        </select>
+    </div>
+    <br />
+    <input type="submit" value="Sort" />
+</form>
+
+<br />
+
+
+
+@if (Model.ChildActivities.Count == 0)
+{
+    <p>No result founded.</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Child</th>
+            <th>Activity</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Virual?</th>
+            <th>Status</th>
+            <th>Detail</th>
+        </tr>
+        @foreach (var ca in Model.ChildActivities)
+        {
+    <tr>
+        <td>@ca.Child.Name</td>
+        <td>@ca.Activity.Name</td>
+        <td>@ca.Activity.StartTime</td>
+        <td>@ca.Activity.EndTime</td>
+
+        @if (@ca.Activity.IsOnline == true)
+        {
+            <td>Yes</td>
+        }
+        else if (@ca.Activity.IsOnline == false)
+        {
+            <td>No</td>
+        }
+
+        @if (@ca.Status == "toDo")
+        {
+            <td>To Do</td>
+        }
+        else if (@ca.Status == "inProgress")
+        {
+            <td>In Progress</td>
+        }
+        else if (@ca.Status == "done")
+        {
+            <td>Done</td>
+        }
+
+        <td><a asp-controller="Activity" asp-action="Detail" asp-route-id="@ca.Activity.Id">View</a></td>
+
+    </tr>
+        }
+
+    </table>
+
+}
+
+

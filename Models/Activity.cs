@@ -14,6 +14,7 @@ namespace KidActivityManagement.Models
             public DateTime EndTime { get; set; }
             public Boolean IsOnline { get; set; }
             public string Location { get; set; }
+            public string UserId { get; set; }
 
             public Activity() { }
 

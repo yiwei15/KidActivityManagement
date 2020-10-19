@@ -158,3 +158,6 @@ C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\ob
 C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\KidActivityManagement.csprojAssemblyReference.cache
+C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+C:\Users\zhaoy\codecamp2020\KidActivityMangamentProject\KidActivityManagement\obj\Debug\netcoreapp3.1\Razor\Views\Search\SearchResult.cshtml.g.cs

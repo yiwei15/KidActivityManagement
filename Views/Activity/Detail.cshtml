@@ -6,56 +6,84 @@
 
 @model KidActivityManagement.ViewModels.ActivityDetailViewModel
 
-
 <h2>Activity Information:</h2>
-         <form class="form-group" asp-controller="Activity" asp-action="EditActivity" asp-route-ActivityId="@Model.ActivityId" method="post">
-            <table class="job-listing">
-            <tr><td>Name: <input type="text" name="Name" value="@Model.Name" /></td>></tr>
-            <tr><td>Start Time: <input type="text" name="StartTime" value="@Model.StartTime" /></td></tr>
-            <tr><td>End Time: <input type="text" name="EndTime" value="@Model.EndTime" /></td></tr>
-            <tr>
-                <td>
-                    Virtual Activity: <input type="text" name="IsOnline" value="@Model.IsOnline" />
-                    @*
-        @if (Model.IsOnline == true)
-        {<span>yes</span> }
-        else
-        {<span>No</span>}
-                    *@
-                </td>
-            </tr>
-            <tr><td>Location or Login Information: <input type="text" name="Location" value="@Model.Location" /></td></tr>
-            </table>
-            <div style="text-align:center">
-                <input type="submit" value="Update" style="text-align:center" />
-            </div>
-       
-        </form>
-
-
-        @foreach (var ca in Model.ChildActivities)
-        {
-
-    <form class="form-group" asp-controller="Activity" asp-action="EditChildActivity" asp-route-childId="@ca.ChildId" asp-route-activityId="@ca.ActivityId">
+<form class="form-group" asp-controller="Activity" asp-action="EditActivity" asp-route-ActivityId="@Model.ActivityId" method="post">
     <table class="job-listing">
+        <tr><td>Name: <input type="text" name="Name" value="@Model.Name" /></td>></tr>
+        <tr><td>Start Time: <input type="datetime" name="StartTime" value="@Model.StartTime" /></td></tr>
+        <tr><td>End Time: <input type="datetime" name="EndTime" value="@Model.EndTime" /></td></tr>
         <tr>
             <td>
-                Child: <a asp-controller="Child" asp-action="Detail" asp-route-id="@ca.Child.Name">
-                    @ca.Child.Name
-                </a>
-            </td>>
-        </tr>
-        <tr>
-            <td>
-                Status: <input type="text" name="ActivityStatus" value="@ca.Status" />
+                Virtual Activity:
+                @*<input type="text" name="IsOnline" value="@Model.IsOnline" />*@
+                @if (Model.IsOnline == true)
+                {
+                    <select name="IsOnline">
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <p>Screen Time: @Model.numOfDays days, @Model.numOfHours hours and @Model.numOfMins mins </p>
+                }
+                else
+                { <select name="IsOnline">
+                        <option value="true">Yes</option>
+                        <option value="false" selected>No</option>
+                    </select>}
             </td>
         </tr>
-        <tr><td>Note: <input type="text" name="ActivityNote" value="@ca.Note" /></td></tr>
+        <tr><td>Location or Login Information: <input type="text" name="Location" value="@Model.Location" /></td></tr>
     </table>
     <div style="text-align:center">
-            <input type="submit" value="Update" style="text-align:center" />
+        <input type="submit" value="Update" style="text-align:center" />
     </div>
 
 </form>
-        }
+
+
+@foreach (var ca in Model.ChildActivities)
+{
+
+    <form class="form-group" asp-controller="Activity" asp-action="EditChildActivity" asp-route-childId="@ca.ChildId" asp-route-activityId="@ca.ActivityId">
+        <table class="job-listing">
+            <tr>
+                <td>
+                    Child: <a asp-controller="Child" asp-action="Detail" asp-route-id="@ca.Child.Name">
+                        @ca.Child.Name
+                    </a>
+                </td>>
+            </tr>
+            <tr>
+                <td>
+                    Status: 
+                    <select name="ActivityStatus" value="@ca.Status">
+                        @if (ca.Status == "inProgress")
+                        {
+                            <option value="toDo">To Do</option>
+                            <option value="inProgress" selected>In Progress</option>
+                            <option value="done">Done</option>
+                        }
+                        else if (ca.Status == "done")
+                        {
+                            <option value="toDo">To Do</option>
+                            <option value="inProgress">In Progress</option>
+                            <option value="done" selected>Done</option>
+
+                        }
+                        else
+                        {
+                            <option value="toDo" selected>To Do</option>
+                            <option value="inProgress">In Progress</option>
+                            <option value="done">Done</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr><td>Note: <input type="text" name="ActivityNote" value="@ca.Note" /></td></tr>
+        </table>
+        <div style="text-align:center">
+            <input type="submit" value="Update" style="text-align:center" />
+        </div>
+
+    </form>
+}
 

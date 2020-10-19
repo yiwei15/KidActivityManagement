@@ -3,14 +3,16 @@ using System;
 using KidActivityManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KidActivityManagement.Migrations
 {
     [DbContext(typeof(ChildActivityDbContext))]
-    partial class ChildActivityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200826202633_AddIdentityToActivity")]
+    partial class AddIdentityToActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

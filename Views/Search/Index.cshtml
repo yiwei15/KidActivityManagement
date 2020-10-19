@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model KidActivityManagement.ViewModels.SearchViewModel
+
+<h1>Search Activity by:</h1>
+
+<br />
+
+<p></p>
+
+<div>
+    <h4><a asp-controller="Search" asp-action="SearchResult">List all Activities</a></h4>
+</div>
+
+<br />
+
+
+<form method="post" asp-controller="Search" asp-action="SearchResult">
+
+    <div>
+        <h4> Child </h4>
+        @foreach (var child in @Model.Children)
+        {
+            <label>@child.Name</label>
+            <input type="checkbox" name="ChildIds" value="@child.Id" /> <br />
+        }
+    </div>
+    <br />
+
+    <div>
+        <h4> Time </h4>
+        <h5> Start Time</h5>
+        <input type="radio" id="anyTimeChoice" name="StartTimeChoice" value="false" onclick="document.getElementById('startTime').disabled = true;">
+        <lable for="anyTime">Any Time</lable><br />
+        <input type="radio" id="startTimeChoice" name="StartTimeChoice" value="true" onclick="document.getElementById('startTime').disabled = false;" />
+        <label for="startTime">Start from: </label>
+        <input type="datetime-local" id="startTime" name="StartTime" />
+        <h5> End Time: </h5>
+        <input type="radio" id="anyEndTimeChoice" name="EndTimeChoice" value="false" onclick="document.getElementById('endTime').disabled = true;">
+        <lable for="anyTime">Any Time</lable><br />
+        <input type="radio" id="endTimeChoice" name="EndTimeChoice" value="true" onclick="document.getElementById('endTime').disabled = false;" />
+        <label for="endTime" type="dateTime-local">End at: </label>
+        <input type="datetime-local" id="endTime" name="EndTime" />
+    </div>
+    <br />
+
+    <div>
+        <h4> Status: </h4>
+        <input type="checkbox" name="StatusList" value="toDo">
+        <label for="toDo">To Do</label><br>
+        <input type="checkbox" name="StatusList" value="inProgress">
+        <label for="inProgress">In Progress</label><br>
+        <input type="checkbox" name="StatusList" value="done">
+        <label for="done">Done</label><br>
+    </div>
+    <br />
+
+    <div>
+        <h4> Virtual? </h4>
+        <input type="radio" name="Online" id="yes" value="yes" />
+        <label for="yes">Yes</label>
+        <input type="radio" name="Online" id="no" value="no" />
+        <label for="no">No</label>
+        <input type="radio" name="Online" id="both" value="both" />
+        <label for="both">Both</label>
+    </div>
+    <br />
+
+    <input type="submit" value="Search" />
+
+</form>
